@@ -1,0 +1,29 @@
+{
+  "name": "convertidor-de-cambios",
+  "version": "1.0.0",
+  "description": "Convertidor de cambios para r-arg-programa",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "cypress-dev": "cypress open",
+    "cypress-run": "cypress run"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/daxas-boop/Convertidor-de-Cambios.git"
+  },
+  "author": "daxas",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/daxas-boop/Convertidor-de-Cambios/issues"
+  },
+  "homepage": "https://github.com/daxas-boop/Convertidor-de-Cambios#readme",
+  "dependencies": {
+    "bootstrap": "^4.5.0",
+    "jquery": "^3.5.1"
+  },
+  "devDependencies": {
+    "cypress": "^4.10.0",
+    "http-server": "^0.12.3"
+  }
+}
