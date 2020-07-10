@@ -3,13 +3,30 @@
 <head>
     <meta charset='utf-8'>
     <meta http-equiv='X-UA-Compatible' content='IE=edge'>
-    <title>Page Title</title>
+    <title>Convertidor de Cambios</title>
     <meta name='viewport' content='width=device-width, initial-scale=1'>
-    <link rel='stylesheet' type='text/css' media='screen' href='main.css'>
+    <link rel="stylesheet" href="node_modules/bootstrap/dist/css/bootstrap.min.css">
 </head>
 <body>
+    <div class="container-fluid">
+         <div class="row">
+            <h1 class="display-3 mx-auto">Convertidor de Cambios</h1> 
+        </div> 
+        <form class="form-inline">
+            <label class="my-1 mr-2" for="cambios">Tipo Cambio</label>
+            <select class="custom-select my-1 mr-sm-2" id="cambios">
+              <option selected>EUR</option>
+            </select>
+            <label class="my-1 mr-2" for="inlineFormCustomSelectPref">Fecha</label>
+                 <input type="date" class="form-control mr-2" id="myDate">
+            <button type="button" id="enviar" class="btn btn-primary my-1">Enviar</button>
+          </form>
+    </div>
+    <div class="container-fluid">
+        <ul id="rates">
 
-
+        </ul>
+    </div>
 
 
 
