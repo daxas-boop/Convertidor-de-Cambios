@@ -1,38 +1,76 @@
-const $cambios = document.querySelector('#cambios');
+const $monedas = document.querySelector('#monedas');
 const $enviar = document.querySelector('#enviar');
-const $rates = document.querySelector('#rates');
 
-fetch('https://api.exchangeratesapi.io/latest')
-  .then((resp) => resp.json())
-  .then((resp) => {
-    const cambios = Object.keys(resp.rates);
-    cambios.forEach((cambio) => {
-      const $option = document.createElement('option');
-      $option.innerText = (cambio);
-      $cambios.appendChild($option);
-    });
-  })
-  .catch((error) => (`FALLO${error}`));
-
-function crearListaDeCambio() {
-  fetch('https://api.exchangeratesapi.io/latest')
-    .then((resp) => resp.json())
-    .then((resp) => {
-      const rates = Object.keys(resp.rates);
-      rates.forEach((rate) => {
-        const $li = document.createElement('li');
-        $li.innerText = (`${rate}: 2`);
-        $rates.appendChild($li);
-      });
-    });
+function obtenerRates(base = 'EUR', fecha = 'latest') {
+  return fetch(`https://api.exchangeratesapi.io/${fecha}?base=${base}`)
+    .then((respuesta) => respuesta.json())
+    .then((respuesta) => respuesta.rates);
 }
 
-$enviar.onclick = crearListaDeCambio;
+function obtenerMoneda() {
+  return obtenerRates().then((respuesta) => Object.keys(respuesta).concat('EUR'));
+}
 
-function date() {
+function seleccionFecha() {
   const myDate = document.querySelector('#myDate');
-  const today = new Date();
-  myDate.value = today.toISOString().substr(0, 10);
+  const hoy = (new Date()).toISOString().split('T')[0];
+  myDate.setAttribute('max', hoy);
 }
 
-date();
+function crearOpciones(monedas) {
+  monedas.sort().forEach((moneda) => {
+    const $moneda = document.createElement('option');
+    $moneda.innerText = moneda;
+    $moneda.dataset.base = moneda;
+    $monedas.appendChild($moneda);
+  });
+}
+
+function inicio() {
+  seleccionFecha();
+  obtenerMoneda().then((respuesta) => {
+    crearOpciones(respuesta);
+  });
+}
+
+inicio();
+
+function obtenerBase() {
+  const { base } = document.querySelector('#monedas').selectedOptions[0].dataset;
+  if (base) {
+    return base;
+  }
+  return undefined;
+}
+
+function obtenerFecha() {
+  const fecha = document.querySelector('#myDate').value;
+  if (fecha) {
+    return fecha;
+  }
+  return undefined;
+}
+
+function mostrarMonedaCambio(rates) {
+  const $tabla = document.querySelector('#tabla-body');
+  $tabla.innerHTML = '';
+  Object.keys(rates).sort().forEach((base) => {
+    const $row = document.createElement('tr');
+    const $base = document.createElement('th');
+    $base.innerText = base;
+    const $cambio = document.createElement('td');
+    $cambio.innerText = rates[base];
+    $row.appendChild($base);
+    $row.appendChild($cambio);
+    $tabla.appendChild($row);
+  });
+}
+
+function enviarFormulario() {
+  obtenerRates(obtenerBase(), obtenerFecha())
+    .then((respuesta) => {
+      mostrarMonedaCambio(respuesta);
+    });
+}
+
+$enviar.onclick = enviarFormulario;
