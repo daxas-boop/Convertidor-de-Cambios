@@ -1,20 +1,19 @@
 <style>
-.body{
-    height:100%;
-}
-.html{
-    height:100%;
-}
-.background{
-    background-image: url('https://mdbootstrap.com/img/Photos/Others/images/91.jpg');
+body{
+    background-image: url('https://247848-766948-raikfcquaxqncofqfm.stackpathdns.com/wp-content/uploads/2018/02/private_equity.jpg');
     background-repeat: no-repeat; 
     background-size: cover; 
     background-position: center center;
-    height: 100%;
-    }
+}
+.th{
+    color:black !important;
+}
+td{
+    color:black !important;
+}
 .table-responsive{
-    width: 33vh !important;
-    height: 80vh !important;
+    border-collapse: separate;
+    border-spacing: 20px 3px;
 }
 </style>
 <!DOCTYPE html>
@@ -24,12 +23,11 @@
     <meta http-equiv='X-UA-Compatible' content='IE=edge'>
     <title>Convertidor de Cambios</title>
     <meta name='viewport' content='width=device-width, initial-scale=1'>
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
+    <link rel="stylesheet" href="node_modules/bootstrap/dist/css/bootstrap.min.css">
 </head>
 <body>
-    <div class="background">
     <div class="container-fluid">
-        <form class="form-inline">
+        <form class="form-inline justify-content-center">
             <label class="my-1 mr-2" for="monedas">Tipo Cambio</label>
             <select class="custom-select my-1 mr-sm-2" id="monedas">
             </select>
@@ -38,17 +36,22 @@
             <button type="button" id="enviar" class="btn btn-primary my-1">Enviar</button>
           </form>
     </div>
-        <table class="table-responsive table-striped table-dark">
-            <thead>
-              <tr>
-                <th scope="col-sm-6">Moneda</th>
-                <th scope="col-sm-6">Cambio</th>
-              </tr>
-            </thead>
-            <tbody id="tabla-body">
 
-            </tbody>
-          </table>
+    <div class="row justify-content-center w-100">
+        <div class="col-auto">
+            <table class="table-responsive table-striped">
+                <thead>
+                    <tr>
+                        <th class="th-sm">Moneda</th>
+                        <th class="th-sm">Cambio</th>
+                    </tr>
+                </thead>
+                <tbody id="tabla-body">
+                </tbody>
+            </table>
+        </div>
+    </div>
     <script src='main.js'></script>
 </body>
+
 </html>
