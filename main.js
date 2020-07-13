@@ -1,6 +1,3 @@
-const $monedas = document.querySelector('#monedas');
-const $enviar = document.querySelector('#enviar');
-
 function obtenerRates(base = 'EUR', fecha = 'latest') {
   return fetch(`https://api.exchangeratesapi.io/${fecha}?base=${base}`)
     .then((respuesta) => respuesta.json())
@@ -18,6 +15,7 @@ function seleccionFecha() {
 }
 
 function crearOpciones(monedas) {
+  const $monedas = document.querySelector('#monedas');
   monedas.sort().forEach((moneda) => {
     const $moneda = document.createElement('option');
     $moneda.innerText = moneda;
@@ -25,15 +23,6 @@ function crearOpciones(monedas) {
     $monedas.appendChild($moneda);
   });
 }
-
-function inicio() {
-  seleccionFecha();
-  obtenerMoneda().then((respuesta) => {
-    crearOpciones(respuesta);
-  });
-}
-
-inicio();
 
 function obtenerBase() {
   const { base } = document.querySelector('#monedas').selectedOptions[0].dataset;
@@ -66,11 +55,25 @@ function mostrarMonedaCambio(rates) {
   });
 }
 
+function mostrarCargando() {
+  document.querySelector('#tabla-body').innerHTML = 'Cargando..';
+}
+
 function enviarFormulario() {
+  mostrarCargando();
   obtenerRates(obtenerBase(), obtenerFecha())
     .then((respuesta) => {
       mostrarMonedaCambio(respuesta);
     });
 }
 
-$enviar.onclick = enviarFormulario;
+function inicio() {
+  const $enviar = document.querySelector('#enviar');
+  $enviar.onclick = enviarFormulario;
+  seleccionFecha();
+  obtenerMoneda().then((respuesta) => {
+    crearOpciones(respuesta);
+  });
+}
+
+inicio();
