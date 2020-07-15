@@ -1,1 +1,16 @@
-
+body{
+    background-image: url('https://247848-766948-raikfcquaxqncofqfm.stackpathdns.com/wp-content/uploads/2018/02/private_equity.jpg');
+    background-repeat: no-repeat; 
+    background-size: cover; 
+    background-position: center center;
+}
+.th{
+    color:black !important;
+}
+td{
+    color:black !important;
+}
+.table-responsive{
+    border-collapse: separate;
+    border-spacing: 20px 3px;
+}
